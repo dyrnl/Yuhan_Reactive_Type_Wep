@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HW02</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        .container {
+            width: 100%;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+        .divider {
+            height: 1px;
+            background-color: black; 
+        }
+        .d_top {
+            flex: 1; 
+            display: flex;
+            justify-content: flex-end; 
+            align-items: center;
+            padding: 0 20px;
+            background-color: skyblue;
+            color : yellow;
+            font-size: 20px;
+            font-family: Arial, sans-serif;
+        }
+        #student_id{
+            color : black;
+            font-size: 20px;
+        }
+        #student_name{
+            color : black;
+            font-size: 20px;
+        }
+        .d_top div {
+            margin: 0 10px; 
+        }
+        .d_bottom {
+            flex: 8;
+            display: flex;
+        }
+        .d_left {
+            flex: 1; 
+            background-color: greenyellow;
+            display: flex;
+            flex-direction: column;
+            align-items: center; 
+            justify-content: flex-start;
+            margin: 8px; padding: 8px;
+        }
+        .d_left button {
+            margin-bottom: 20px; 
+            color: black;
+            font-size: 80px;
+            font-family: Arial, sans-serif;
+        }
+        .d_right {
+            flex: 4;
+            color: black;
+            font-size: 25px;
+            font-family: Arial, sans-serif;
+            display: flex;
+            align-items: center; 
+            justify-content: center; 
+        }
+        .d_right p {
+            text-align: center;
+        }
+        .divider_vertical {
+            width: 1px; 
+            background-color: black; 
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="d_top">
+            <div id="student_id">
+                <h2>학번: 202327021</h2>
+            </div>
+            <div id="student_name">
+                <h2>이름: 송영진</h2>
+            </div>
+        </div>
+        <div class="divider"></div>
+        <div class="d_bottom">
+            <div class="d_left">
+                <button id="button1">버튼1</button>
+                <button id="button2">버튼2</button>
+            </div>
+            <div class="divider_vertical"></div> 
+            <div class="d_right" id="canvasContainer">
+                <p>빈화면</p>
+            </div>
+        </div>
+    </div>
+    <script>
+        document.getElementById("button1").addEventListener("click", function() 
+        {
+            var canvasContainer = document.getElementById("canvasContainer");
+            canvasContainer.innerHTML = '<canvas id="myCanvas" width="400" height="400"></canvas>';
+            
+            function drawCircle() {
+                var canvas = document.getElementById("myCanvas");
+                if (canvas.getContext) {
+                    var ctx = canvas.getContext("2d");
+                    ctx.beginPath();
+                    ctx.arc(200, 200, 100, 0, 2 * Math.PI);
+                    ctx.stroke();
+                }
+            }
+            drawCircle();
+        });
+
+        document.getElementById("button2").addEventListener("click", function() 
+        {
+            var dRight = document.getElementById("canvasContainer");
+            dRight.innerHTML = '<div style="display: flex;">' +
+                                   '<div style="flex: 1; padding-left: 200px;">' +
+                                       '<img src="https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcSylObVvIpNu_ftQLq2m5wxKpcmZJCej42XOoaXO-DbA8wEboSp" alt="Image">' +
+                                   '</div>' +
+                                   '<div style="flex: 2; padding-right: 300px;">' +
+                                       '<p>* 게임이름: 로스트아크</p>' +
+                                       '<p>* 출시연도: 2018년</p>' +
+                                       '<p>* 장르: MMORPG</p>' +
+                                       '<p>* 좋아하는 이유: 노력하는만큼 내가 원하는 보스를 잡을 수 있고 아바타의 자유도가 높아서 꾸미는 재미가 있기 때문이다.</p>' +
+                                   '</div>' +
+                               '</div>';
+        });
+    </script>    
+</body>
+</html>
+

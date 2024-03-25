@@ -6,13 +6,7 @@ var studentID = 202327021;
 
 function drawNum(num)
 {
-        ctx.beginPath();
-        ctx.moveTo(30, 30);
-        ctx.lineTo(30, 90);
-        ctx.strokeStyle = "black";
-        ctx.lineWidth = 1;
-        ctx.stroke();
-        ctx.closePath();
+    
 }
 
 // (50,300) (974, 300) magenta 3px;

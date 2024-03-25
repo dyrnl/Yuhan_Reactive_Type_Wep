@@ -13,7 +13,6 @@ function drawNum(num)
         ctx.lineWidth = 1;
         ctx.stroke();
         ctx.closePath();
-    
 }
 
 // (50,300) (974, 300) magenta 3px;

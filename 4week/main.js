@@ -6,17 +6,39 @@ var studentID = 202327021;
 
 function drawNum(num)
 {
-    if (num == 1)
-    {
-        ctx.beginPath();
-        ctx.moveTo(30, canvas.height);
-        ctx.lineTo(30, 90);
-        ctx.strokeStyle = "black";
-        ctx.lineWidth = 1;
-        ctx.stroke();
-        ctx.closePath();
-    }
+    
 }
+
+function drawSegment()
+{
+    ctx.beginPath();
+    
+    // 현재 ctx의 위치
+    var currentX = 60;
+    var currentY = 40;
+
+    // vertical, horizontal
+    var vSize = 30;
+    var hSize = 10;
+
+    ctx.moveTo(currentX, currentY -= ((vSize / 2) + hSize));
+    ctx.stroke();
+    ctx.lineTo(currentX += hSize, currentY += hSize);
+    ctx.stroke();
+    ctx.lineTo(currentX, currentY += hSize);
+    ctx.stroke();
+    ctx.lineTo(currentX -= hSize, currentY += hSize);
+    ctx.stroke();
+    ctx.lineTo(currentX -= hSize, currentY -= hSize);
+    ctx.stroke();
+    ctx.lineTo(currentX, currentY -= vSize);
+    ctx.stroke();
+    ctx.lineTo(currentX += hSize, currentY -= hSize);
+    ctx.stroke();
+    ctx.fill();
+}
+
+drawSegment();
 
 // (50,300) (974, 300) magenta 3px;
 ctx.beginPath();

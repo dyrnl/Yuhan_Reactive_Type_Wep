@@ -61,13 +61,15 @@ function drawMoon(moonOrbitSpeed)
 function draw() 
 {
     rotateAngleSun += sunRotationSpeed;
-    rotateAngleEarth += earthRotationSpeed;
+    rotateAngleEarth -= earthRotationSpeed;
     
     ctx.clearRect(-canvas.width / 2, -canvas.height / 2, canvas.width, canvas.height);
     drawSun();
     drawEarth(rotateAngleEarth);
     
-    requestAnimationFrame(draw);
+    //requestAnimationFrame(draw);
 }
+
+setInterval(draw, 1000.0 / 60.0)
 
 draw();

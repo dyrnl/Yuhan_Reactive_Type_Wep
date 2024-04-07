@@ -20,22 +20,24 @@ var rotateAngleEarth = 0;
 var rotateAngleMoon = 0;
 var rotateAngleSun = 0;
 
-
 ctx.translate(canvas.width / 2, canvas.height / 2);
 
-function drawRect(x, y, width, height, color) {
+function drawRect(x, y, width, height, color) 
+{
     ctx.fillStyle = color;
     ctx.fillRect(x, y, width, height);
 }
 
-function drawSun() {
+function drawSun() 
+{
     ctx.save();
     ctx.rotate(rotateAngleSun);
     drawRect(-sunSize / 2, -sunSize / 2, sunSize, sunSize, "orange");
     ctx.restore();
 }
 
-function drawEarth(earthOrbitSpeed) {
+function drawEarth(earthOrbitSpeed) 
+{
     ctx.save();
     ctx.rotate(earthOrbitSpeed); // 지구의 공전
     ctx.translate(earthOrbitRadius, 0);
@@ -45,7 +47,8 @@ function drawEarth(earthOrbitSpeed) {
     ctx.restore();
 }
 
-function drawMoon(moonOrbitSpeed) {
+function drawMoon(moonOrbitSpeed) 
+{
     rotateAngleMoon += moonRotationSpeed;
     ctx.save();
     ctx.rotate(moonOrbitSpeed); // 달의 공전
@@ -55,7 +58,8 @@ function drawMoon(moonOrbitSpeed) {
     ctx.restore();
 }
 
-function draw() {
+function draw() 
+{
     rotateAngleSun += sunRotationSpeed;
     rotateAngleEarth += earthRotationSpeed;
     

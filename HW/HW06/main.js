@@ -1,5 +1,3 @@
-// heart.js
-
 class HeartObject {
     constructor(x, y, size, color, speed, rotationAngle) {
         this.x = x;
@@ -8,13 +6,12 @@ class HeartObject {
         this.color = color;
         this.speed = speed;
         this.rotationAngle = rotationAngle;
-        this.direction = this.rotationAngle * Math.PI / 180; // 이동 방향
+        this.direction = this.rotationAngle * Math.PI / 180; 
     }
 
     draw(ctx) {
-        ctx.save(); // 현재 캔버스 상태 저장
-        ctx.translate(this.x, this.y); // 이동 중심점을 현재 하트의 위치로 설정
-        ctx.rotate(this.direction); // 이동 방향에 따라 회전
+        ctx.save(); 
+        ctx.translate(this.x, this.y); 
         ctx.fillStyle = this.color;
         ctx.beginPath();
         for (let t = 0; t <= 2 * Math.PI; t += 0.01) {
@@ -24,7 +21,7 @@ class HeartObject {
         }
         ctx.closePath();
         ctx.fill();
-        ctx.restore(); // 이전 캔버스 상태 복원
+        ctx.restore(); 
     }
 
     update() {

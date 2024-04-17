@@ -1,0 +1,35 @@
+Dom 모델
+JS Canvas
+Canvas 좌표계 world 좌표계 local좌표계 변환
+Rotate 
+Degree(각도) 
+Radian(라디안. 원의 반지름에 대한 호의 길이의 비로 정의)
+2PI = 360˚, PI = 180˚, PI / 2 = 90˚
+Collision(충돌)
+Circle Collision 구하기 
+r1 + r2 = > Length > r1 - r2
+
+부채꼴 넓이 구하기
+(1 / 2) * r * l
+(1 / 2) * r * 2πr * (x / 360)
+
+원의 충돌 면적 계산
+r1 * r2 = √(r1^2 + r2^2) * h
+h = x2 - x1 + y2 - y1
+
+충돌 면적 구하기
+(1 / 2) * r1 * 2πr1 * Θ / 360 + (1 / 2) * r2 * 2πr2 * Θ / 360 - r1 * r2 * 2
+
+function collisionCircle(r1, r2) {
+    if (r1.x === r2.x && r1.y === r2.y) {
+        return true;
+    }
+    
+    let dist = Math.pow(r1.x - r2.x, 2) + Math.pow(r1.y - r2.y, 2);
+    let r = Math.pow(r1.radius + r2.radius, 2);
+    
+    if (dist < r) {
+        return true;
+    }
+    return false;
+}

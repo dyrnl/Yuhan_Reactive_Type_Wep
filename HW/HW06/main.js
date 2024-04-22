@@ -1,78 +1,62 @@
-class HeartObject {
-    constructor(x, y, size, color, speed, rotationAngle) {
-        this.x = x;
-        this.y = y;
-        this.size = size;
-        this.color = color;
-        this.speed = speed;
-        this.rotationAngle = rotationAngle;
-        this.direction = this.rotationAngle * Math.PI / 180; 
-    }
+window.onload = function() {
+    var canvas = document.getElementById("myCanvas");
+    var ctx = canvas.getContext("2d");
+  
+    // 캔버스의 중앙 좌표 계산
+    var centerX = canvas.width / 2;
+    var centerY = canvas.height / 2;
+  
+    // 로컬 좌표계 설정
+    ctx.translate(centerX, centerY);
 
-    draw(ctx) {
-        ctx.save(); 
-        ctx.translate(this.x, this.y); 
-        ctx.fillStyle = this.color;
-        ctx.beginPath();
-        for (let t = 0; t <= 2 * Math.PI; t += 0.01) {
-            let x = 16 * Math.pow(Math.sin(t), 3);
-            let y = 13 * Math.cos(t) - 5 * Math.cos(2 * t) - 2 * Math.cos(3 * t) - Math.cos(4 * t);
-            ctx.lineTo(this.size * x, -this.size * y);
-        }
-        ctx.closePath();
-        ctx.fill();
-        ctx.restore(); 
-    }
+    // 별 그리기
+    drawStar(ctx, 0, 0, 5, 10, 4); // outerRadius와 innerRadius 값 조정
 
-    update() {
-        this.x += this.speed * Math.cos(this.direction);
-        this.y += this.speed * Math.sin(this.direction);
+    // 하트 그리기
+    drawHeartOnStar(ctx, centerX, centerY, 10, 'red'); // 별 중앙에 하트 그리기
+};
+
+// 별 그리는 함수
+function drawStar(ctx, cx, cy, spikes, outerRadius, innerRadius) {
+    var rot = (Math.PI / 2) * 3;
+    var x = cx;
+    var y = cy;
+    var step = Math.PI / spikes;
+
+    ctx.beginPath();
+    ctx.moveTo(cx, cy - outerRadius);
+    for (var i = 0; i < spikes; i++) {
+        x = cx + Math.cos(rot) * outerRadius;
+        y = cy + Math.sin(rot) * outerRadius;
+        ctx.lineTo(x, y);
+        rot += step;
+
+        x = cx + Math.cos(rot) * innerRadius;
+        y = cy + Math.sin(rot) * innerRadius;
+        ctx.lineTo(x, y);
+        rot += step;
     }
+    ctx.lineTo(cx, cy - outerRadius);
+    ctx.closePath();
+    ctx.lineWidth = 2; // 선 굵기 변경
+    ctx.strokeStyle = 'black';
+    ctx.stroke();
+    ctx.fillStyle = 'gold';
+    ctx.fill();
 }
 
-const canvas = document.getElementById('GameScreenCanvas');
-
-if (canvas) {
-    const ctx = canvas.getContext('2d');
-    canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight;
-
-    let hearts = [];
-
-    function createHeart() {
-        const x = Math.random() * canvas.width;
-        const y = Math.random() * canvas.height;
-        const size = Math.random() * 20 + 10;
-        const color = `rgb(${Math.random() * 255},${Math.random() * 255},${Math.random() * 255})`;
-        const speed = Math.random() * 2 + 1;
-        const rotationAngle = Math.random() * 360;
-
-        const heart = new HeartObject(x, y, size, color, speed, rotationAngle);
-        hearts.push(heart);
-
-        if (hearts.length > 100) {
-            hearts.shift();
-        }
+// 별 위에 하트 그리는 함수
+function drawHeartOnStar(ctx, cx, cy, size, color) {
+    ctx.save(); 
+    ctx.translate(cx, cy); 
+    ctx.fillStyle = color;
+    ctx.beginPath();
+    for (let t = 0; t <= 2 * Math.PI; t += 0.01) {
+        let x = 16 * Math.pow(Math.sin(t), 3);
+        let y = 13 * Math.cos(t) - 5 * Math.cos(2 * t) - 2 * Math.cos(3 * t) - Math.cos(4 * t);
+        ctx.lineTo(size * x, -size * y);
     }
-
-    setInterval(createHeart, 200);
-
-    function draw() {
-        ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-        hearts.forEach(heart => {
-            heart.draw(ctx);
-            heart.update();
-        });
-
-        requestAnimationFrame(draw);
-    }
-
-    canvas.addEventListener('mousemove', (e) => {
-        createHeart();
-    });
-
-    draw();
-} else {
-    console.error('Canvas element not found.');
+    ctx.closePath();
+    ctx.fill();
+    ctx.restore(); 
 }

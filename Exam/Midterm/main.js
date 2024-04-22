@@ -24,11 +24,16 @@ window.onload = function() {
             }, 1000); // 1초 후에 동작
             // 네모의 색상을 변경
             drawSquare(ctx, canvas.width / 2 - 50, canvas.height / 2 - 20, 100, 40, 'rgb(0, 32, 96)', '시작');
+            // 마우스 이벤트 제거
+            canvas.removeEventListener('mousemove', mouseMoveHandler);
         }
     });
 
     // 네모 위에 마우스를 올렸을 때 색상 변경
-    canvas.addEventListener('mousemove', function(event) {
+    canvas.addEventListener('mousemove', mouseMoveHandler);
+
+    // 마우스 이벤트 처리 함수
+    function mouseMoveHandler(event) {
         var rect = canvas.getBoundingClientRect();
         var mouseX = event.clientX - rect.left;
         var mouseY = event.clientY - rect.top;
@@ -38,18 +43,20 @@ window.onload = function() {
             mouseY >= canvas.height / 2 - 20 && mouseY <= canvas.height / 2 + 20) {
             // 네모의 색상 변경
             drawSquare(ctx, canvas.width / 2 - 50, canvas.height / 2 - 20, 100, 40, 'rgb(248, 203, 178)', '시작');
-        } else
-        {
+        } else {
             // 네모의 색상을 다시 흰색으로 변경
             drawSquare(ctx, canvas.width / 2 - 50, canvas.height / 2 - 20, 100, 40, 'white', '시작');
         }
-    });
+    }
 };
 
 // 흰색 네모 그리기
 function drawSquare(ctx, x, y, width, height, color, text) {
     ctx.fillStyle = color;
     ctx.fillRect(x, y, width, height);
+    ctx.strokeStyle = 'black'; // 외곽선 색상 설정
+    ctx.lineWidth = 2; // 외곽선 두께 설정
+    ctx.strokeRect(x, y, width, height); // 외곽선 그리기
     ctx.fillStyle = 'black';
     ctx.font = '20px Arial';
     ctx.fillText(text, x + 25, y + 27);
@@ -80,7 +87,7 @@ function drawStar(ctx, cx, cy, spikes, outerRadius, innerRadius) {
     }
     ctx.lineTo(cx, cy - outerRadius);
     ctx.closePath();
-    ctx.lineWidth = 2;
+    ctx.lineWidth = 2; // 선 굵기 변경
     ctx.strokeStyle = 'black';
     ctx.stroke();
     ctx.fillStyle = 'gold';
@@ -99,7 +106,7 @@ function drawRandomHeart(ctx, canvasWidth, canvasHeight, size, color) {
     for (let t = 0; t <= 2 * Math.PI; t += 0.01) {
         let px = 16 * Math.pow(Math.sin(t), 3);
         let py = 13 * Math.cos(t) - 5 * Math.cos(2 * t) - 2 * Math.cos(3 * t) - Math.cos(4 * t);
-        ctx.lineTo(size * px / 20, -size * py / 20);
+        ctx.lineTo(size * px / 20, -size * py / 20); // 크기를 작게 조정
     }
     ctx.closePath();
     ctx.fill();

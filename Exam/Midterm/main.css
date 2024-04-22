@@ -3,13 +3,11 @@ body {
     padding: 0;
     background-color: rgb(72, 153, 242);
 }
-  
+
 #myCanvas {
     display: block;
     margin: 50px auto;
-    background-color: rgb(180, 180, 180);
+    background-color: "blue";
     height: 800px; /* 캔버스의 높이 */
     width: 480px; /* 캔버스의 너비 */
 }
-
-  

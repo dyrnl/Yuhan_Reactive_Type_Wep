@@ -21,6 +21,7 @@ window.onload = function() {
                 clearCanvas(ctx); // 캔버스 초기화
                 drawStar(ctx, canvas.width / 2, canvas.height / 2, 5, 10, 4); // 별 그리기
                 drawRandomHeart(ctx, canvas.width, canvas.height, 15, 'red'); // 하트 그리기
+                canvas.style.backgroundColor = 'rgb(180, 180, 180)'; // 캔버스 색상 변경
             }, 1000); // 1초 후에 동작
             // 네모의 색상을 변경
             drawSquare(ctx, canvas.width / 2 - 50, canvas.height / 2 - 20, 100, 40, 'rgb(0, 32, 96)', '시작');

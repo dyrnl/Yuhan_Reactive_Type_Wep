@@ -7,7 +7,7 @@ body {
 #myCanvas {
     display: block;
     margin: 50px auto;
-    background-color: "blue";
+    background-color: "blue"; /* 수정된 부분 */
     height: 800px; /* 캔버스의 높이 */
     width: 480px; /* 캔버스의 너비 */
 }
